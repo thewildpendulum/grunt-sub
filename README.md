@@ -1,6 +1,6 @@
 # sub
 
-> Run sub-projects' grunt tasks
+Run sub-projects' grunt tasks. Stolen and liberally modified from this [gist](https://gist.github.com/cowboy/3819170) by [@cowboy](https://github.com/cowboy).
 
 ## Getting Started
 This plugin requires Grunt.
@@ -20,7 +20,7 @@ grunt.loadNpmTasks('sub');
 ## The "sub" task
 
 ### Overview
-In your project's Gruntfile, add a section named `sub` to the data object passed into `grunt.initConfig()`.
+In a separate, "master" Gruntfile, add a section named `sub` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
@@ -65,7 +65,7 @@ In this example, the target of a multitask is run by passing `sub` three argumen
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+May 12, 2014 - Alpha release
 
 ## License
 Copyright (c) 2014 Tim Hemphill. Licensed under the MIT license.
