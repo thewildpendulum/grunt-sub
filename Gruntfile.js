@@ -1,6 +1,6 @@
 /*
- * sub
- * 
+ * grunt-sub
+ *
  *
  * Copyright (c) 2014 Tim Hemphill
  * Licensed under the MIT license.
@@ -14,40 +14,14 @@ module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    jshint: {
-      all: [
-        'Gruntfile.js',
-        'tasks/*.js',
-        '<%= nodeunit.tests %>'
-      ],
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
-      }
-    },
-
-    // Before generating any new files, remove any previously-created files.
+    // remove files from running tests
     clean: {
-      tests: ['tmp']
+      tests: ['test/fixtures/tmp']
     },
 
-    // Configuration to be run (and then tested).
     sub: {
-      default_options: {
-        options: {
-        },
-        files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
-      },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!'
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
+      test: {
+        subdir: './test/fixtures/'
       }
     },
 
@@ -58,14 +32,18 @@ module.exports = function (grunt) {
 
   });
 
-  // Actually load this plugin's task(s).
+  // Actually load this plugin's task(s)
   grunt.loadTasks('tasks');
 
-  // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-  // plugin's task(s), then test the result.
-  grunt.registerTask('test', ['clean', 'sub', 'nodeunit']);
+  // Run this plugin's test task, then run unit tests, then clean up
+  grunt.registerTask('test', [
+    'sub:test',
+    'sub:test:task_test',
+    'sub:test:target_test:target',
+    'nodeunit',
+    'clean'
+  ]);
 
-  // By default, lint and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
-
+  // By default, run tests
+  grunt.registerTask('default', ['test']);
 };
