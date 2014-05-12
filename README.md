@@ -1,6 +1,6 @@
 # sub
 
-> Manage sub-projects through one gruntfile
+> Run sub-projects' grunt tasks
 
 ## Getting Started
 This plugin requires Grunt.
@@ -25,11 +25,8 @@ In your project's Gruntfile, add a section named `sub` to the data object passed
 ```js
 grunt.initConfig({
   sub: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
+    subdir: {
+      // directory containing the sub-project's Gruntfile
     },
   },
 })
@@ -37,50 +34,32 @@ grunt.initConfig({
 
 ### Options
 
-#### options.separator
+#### options.subdir
 Type: `String`
-Default value: `',  '`
+Default value: none
 
-A string value that is used to do something with whatever.
+A string value that grunt-sub uses to find the Gruntfile of a sub-project
 
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
+### Usage
 
-A string value that is used to do something else with whatever else.
+This plugin is meant to augment grunt when used from the command line. Once your `sub` task is configured and you've installed your sub-projects' dependencies, you may control any one of them from one location:
 
-### Usage Examples
+`grunt sub:subproject:task_name`
 
-#### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+#### Running the Default task
+In this example, the default task is run by passing `sub` just one argument: the project name.
 
-```js
-grunt.initConfig({
-  sub: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
+`grunt sub:subproject`
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### Running a specific task
+In this example, an arbitrary task is run by passing `sub` two arguments: the project name and the task name.
 
-```js
-grunt.initConfig({
-  sub: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
+`grunt sub:subproject:task`
+
+#### Running the target of a multitask
+In this example, the target of a multitask is run by passing `sub` three arguments: the project name, the task name, and the target name.
+
+`grunt sub:subproject:task:target`
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
