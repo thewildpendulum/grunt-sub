@@ -27,21 +27,30 @@ exports.sub = {
     // setup here if necessary
     done();
   },
-  default_options: function (test) {
+  default_test: function (test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/default_options');
-    var expected = grunt.file.read('test/expected/default_options');
-    test.equal(actual, expected, 'should describe what the default behavior is.');
+    var actual = grunt.file.read(__dirname + '/fixtures/tmp/default_output');
+    var expected = 'Ran default_test';
+    test.equal(actual, expected, "should run the sub project's default task.");
 
     test.done();
   },
-  custom_options: function (test) {
+  task_test: function (test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/custom_options');
-    var expected = grunt.file.read('test/expected/custom_options');
-    test.equal(actual, expected, 'should describe what the custom option(s) behavior is.');
+    var actual = grunt.file.read(__dirname + '/fixtures/tmp/task_output');
+    var expected = 'Ran task_test';
+    test.equal(actual, expected, "should run the sub project's specified task.");
+
+    test.done();
+  },
+  target_test: function (test) {
+    test.expect(1);
+
+    var actual = grunt.file.read(__dirname + '/fixtures/tmp/target_output');
+    var expected = 'Ran target_test with: target';
+    test.equal(actual, expected, "should run the sub project's specified target of the specified task.");
 
     test.done();
   }
